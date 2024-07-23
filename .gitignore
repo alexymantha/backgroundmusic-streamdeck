@@ -1,0 +1,12 @@
+# Node.js
+node_modules/
+
+# IDE files
+.vscode/
+
+# MacOS
+**/.DS_Store
+
+# Stream Deck files
+*.sdPlugin/bin
+*.sdPlugin/logs
