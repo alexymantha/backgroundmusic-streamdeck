@@ -26,6 +26,6 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run config
       - run: bun run build
-      - run: bun run validate ${{ env.PLUGIN_PATH }}
-      - run: bun run bundle ${{ env.PLUGIN_PATH }}
+      - run: bun run --bun validate ${{ env.PLUGIN_PATH }}
+      - run: bun run --bun bundle ${{ env.PLUGIN_PATH }}
 
