@@ -1,0 +1,10 @@
+version: '3'
+
+tasks:
+  images:
+    dir: 'images/'
+    cmds:
+      - ./generate.sh
+  build:
+    cmds:
+      - bun run build

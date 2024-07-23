@@ -1,0 +1,27 @@
+name: Build plugin
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  PLUGIN_PATH: dev.mantha.backgroundmusic-streamdeck.sdPlugin
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install Task
+        uses: arduino/setup-task@v2
+      - run: bun install --frozen-lockfile
+      - run: task build
+      - run: bunx @elgato/cli validate ${{ env.PLUGIN_PATH }}
+      - run: bunx @elgato/cli bundle ${{ env.PLUGIN_PATH }}
+
