@@ -22,12 +22,18 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - run: bun install --frozen-lockfile
-      - run: bun run config
-      - run: bun run build
-      - run: bun run validate ${{ env.PLUGIN_PATH }}
-      - run: bun run bundle ${{ env.PLUGIN_PATH }}
-      - run: zip -r ${{ env.PLUGIN_PATH }}.zip ${{ env.PLUGIN_PATH }}/
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Check formatting
+        run: bun prettier . --check
+      - name: Build
+        run: bun run build
+      - name: StreakDeck validation
+        run: bun run validate ${{ env.PLUGIN_PATH }}
+      - name: Bundle
+        run: bun run bundle ${{ env.PLUGIN_PATH }}
+      - name: Archive plugin
+        run: zip -r ${{ env.PLUGIN_PATH }}.zip ${{ env.PLUGIN_PATH }}/
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ env.PLUGIN_PATH }}.zip

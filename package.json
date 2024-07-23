@@ -9,7 +9,7 @@
   "type": "module",
   "devDependencies": {
     "@elgato/cli": "^0.3.1",
-    "@rollup/plugin-commonjs": "^25.0.5",
+      "@rollup/plugin-commonjs": "^25.0.5",
     "@rollup/plugin-node-resolve": "^15.2.2",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
