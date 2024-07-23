@@ -21,7 +21,7 @@ jobs:
       - name: Install Task
         uses: arduino/setup-task@v2
       - run: bun install --frozen-lockfile
-      - run: task build
+      - run: bun run build
       - run: bun run validate ${{ env.PLUGIN_PATH }}
       - run: bun run bundle ${{ env.PLUGIN_PATH }}
 
