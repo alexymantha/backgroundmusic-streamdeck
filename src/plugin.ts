@@ -10,4 +10,3 @@ streamDeck.actions.registerAction(new VolumeDial());
 
 // Finally, connect to the Stream Deck.
 streamDeck.connect();
-

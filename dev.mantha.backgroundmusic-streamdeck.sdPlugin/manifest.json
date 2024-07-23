@@ -1,55 +1,51 @@
 {
-	"Name": "Background Music",
-	"Version": "0.1.0.0",
-	"Author": "Alexy Mantha",
-	"Actions": [
-		{
-			"Name": "Volume",
-			"UUID": "dev.mantha.backgroundmusic-streamdeck.volume",
-			"Icon": "imgs/actions/volume/icon",
-			"Tooltip": "Controls the volume of an application.",
-			"Controllers": [
-				"Encoder"
-			],
-			"Encoder": {
-				"layout": "$B1",
-				"TriggerDescription": {
-					"Rotate": "Turn the volume of the application up and down",
-					"Push": "Mute/unmute the application"
-				}
-			},
-			"States": [
-				{
-					"Image": "imgs/actions/volume/key",
-					"TitleAlignment": "middle"
-				}
-			],
-			"PropertyInspectorPath": "actions/volume/inspector.html"
-		}
-	],
-	"Category": "Background Music",
-	"CategoryIcon": "imgs/plugin/category",
-	"CodePath": "bin/plugin.js",
-	"Description": "A StreamDeck plugin for the MacOS utility Background Music",
-	"Icon": "imgs/plugin/plugin",
-	"SDKVersion": 2,
-	"Software": {
-		"MinimumVersion": "6.5"
-	},
-	"OS": [
-		{
-			"Platform": "mac",
-			"MinimumVersion": "10.15"
-		}
-	],
-	"ApplicationsToMonitor": {
-		"mac": [
-			"com.bearisdriving.BGM.App"
-		]
-	},
-	"Nodejs": {
-		"Version": "20",
-		"Debug": "--inspect=127.0.0.1:12345"
-	},
-	"UUID": "dev.mantha.backgroundmusic-streamdeck"
+  "Name": "Background Music",
+  "Version": "0.1.0.0",
+  "Author": "Alexy Mantha",
+  "Actions": [
+    {
+      "Name": "Volume",
+      "UUID": "dev.mantha.backgroundmusic-streamdeck.volume",
+      "Icon": "imgs/actions/volume/icon",
+      "Tooltip": "Controls the volume of an application.",
+      "Controllers": ["Encoder"],
+      "Encoder": {
+        "layout": "$B1",
+        "TriggerDescription": {
+          "Rotate": "Turn the volume of the application up and down",
+          "Push": "Mute/unmute the application"
+        }
+      },
+      "States": [
+        {
+          "Image": "imgs/actions/volume/key",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "PropertyInspectorPath": "actions/volume/inspector.html"
+    }
+  ],
+  "Category": "Background Music",
+  "CategoryIcon": "imgs/plugin/category",
+  "CodePath": "bin/plugin.js",
+  "Description": "A StreamDeck plugin for the MacOS utility Background Music",
+  "Icon": "imgs/plugin/plugin",
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "6.5"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.15"
+    }
+  ],
+  "ApplicationsToMonitor": {
+    "mac": ["com.bearisdriving.BGM.App"]
+  },
+  "Nodejs": {
+    "Version": "20",
+    "Debug": "--inspect=127.0.0.1:12345"
+  },
+  "UUID": "dev.mantha.backgroundmusic-streamdeck"
 }
