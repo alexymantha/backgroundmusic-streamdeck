@@ -1,22 +1,5 @@
-import { Action, action, DialDownEvent, DialRotateEvent, DidReceiveSettingsEvent, PropertyInspectorDidAppearEvent, SendToPluginEvent, SingletonAction, WillAppearEvent } from "@elgato/streamdeck";
-import { runAppleScript } from "run-applescript";
-
-async function getVolume(identifier: string): Promise<number> {
-	const result = await runAppleScript(`
-		tell application "Background Music"
-		    set appVol to (vol of (a reference to (the first audio application whose name is equal to "${identifier}")))
-		end tell
-	`);
-	return parseInt(result);
-}
-
-async function setVolume(identifier: string, volume: number): Promise<void> {
-	await runAppleScript(`
-		tell application "Background Music"
-		    set vol of (a reference to (the first audio application whose name is equal to "${identifier}")) to ${volume}
-		end tell
-	`);
-}
+import { Action, action, DialDownEvent, DialRotateEvent, DidReceiveSettingsEvent, SingletonAction, WillAppearEvent } from "@elgato/streamdeck";
+import bgm from "../backgroundmusic";
 
 type VolumeDialState = {
 	muted: boolean;
@@ -44,8 +27,8 @@ export class VolumeDial extends SingletonAction<VolumeSettings> {
 			return;
 		}
 
-		const ticks = ev.payload.ticks;
-		const newVolume = clamp(state.volume + ticks, 0, 100);
+		const steps = ev.payload.settings.steps ?? 1;
+		const newVolume = clamp(state.volume + ev.payload.ticks * steps, 0, 100);
 		state.volume = newVolume;
 		
 		this.setDialState(ev.action.id, state);
@@ -53,11 +36,7 @@ export class VolumeDial extends SingletonAction<VolumeSettings> {
 			value: newVolume == 0 ? "Muted" : newVolume,
 			"indicator": newVolume
 		})
-		try {
-			await setVolume(ev.payload.settings.identifier, newVolume)
-		} catch (e) {
-			await ev.action.showAlert()
-		}
+		await bgm.setVolume(ev.payload.settings.identifier, newVolume)
 	}
 
 	async onDialDown(ev: DialDownEvent<VolumeSettings>): Promise<void> {
@@ -71,18 +50,18 @@ export class VolumeDial extends SingletonAction<VolumeSettings> {
 		state.muted = muted;
 
 		this.setDialState(ev.action.id, state);
-		await setVolume(ev.payload.settings.identifier, newVolume);
 		await ev.action.setFeedback({
 			value: newVolume == 0 ? "Muted" : newVolume,
 			"indicator": newVolume
 		})
+		await bgm.setVolume(ev.payload.settings.identifier, newVolume);
 	}
 
 	async initializeDialState(action: Action<VolumeSettings>, settings: VolumeSettings) {
 		const state = this.getDialState(action.id);
 		let volume: number;
 		try {
-			volume = await getVolume(settings.identifier);
+			volume = await bgm.getVolume(settings.identifier);
 		} catch (e) {
 			action.showAlert();
 			state.disabled = true;
@@ -102,10 +81,6 @@ export class VolumeDial extends SingletonAction<VolumeSettings> {
 		await action.setFeedback({
 			value: volume,
 			"indicator": {
-				range: {
-					min: 0,
-					max: 100,
-				},
 				value: volume
 			}
 		})
@@ -137,6 +112,7 @@ export class VolumeDial extends SingletonAction<VolumeSettings> {
  */
 type VolumeSettings = {
 	identifier: string;
+	steps: number;
 };
 
 function clamp(value: number, min: number, max: number): number {
