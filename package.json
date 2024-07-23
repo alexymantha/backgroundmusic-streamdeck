@@ -1,7 +1,9 @@
 {
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart dev.mantha.backgroundmusic-streamdeck\""
+    "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart dev.mantha.backgroundmusic-streamdeck\"",
+    "validate": "streamdeck validate dev.mantha.backgroundmusic-streamdeck.sdPlugin",
+    "bundle": "streamdeck bundle dev.mantha.backgroundmusic-streamdeck.sdPlugin"
   },
   "type": "module",
   "devDependencies": {

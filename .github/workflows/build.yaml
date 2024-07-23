@@ -22,6 +22,6 @@ jobs:
         uses: arduino/setup-task@v2
       - run: bun install --frozen-lockfile
       - run: task build
-      - run: bunx @elgato/cli validate ${{ env.PLUGIN_PATH }}
-      - run: bunx @elgato/cli bundle ${{ env.PLUGIN_PATH }}
+      - run: bun run validate ${{ env.PLUGIN_PATH }}
+      - run: bun run bundle ${{ env.PLUGIN_PATH }}
 
