@@ -60,6 +60,7 @@ jobs:
         with:
           name: ${{ env.PLUGIN_UUID }}.streamDeckPlugin
       - uses: googleapis/release-please-action@v4
+        id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
