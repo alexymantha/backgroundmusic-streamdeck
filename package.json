@@ -26,5 +26,6 @@
     "run-applescript": "^7.0.0"
   },
   "name": "backgroundmusic-streamdeck",
-  "module": "index.ts"
+  "module": "index.ts",
+  "version": "1.0.0"
 }
