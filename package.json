@@ -15,7 +15,7 @@
     "@rollup/plugin-typescript": "^11.1.5",
     "@tsconfig/node20": "^20.1.2",
     "@types/bun": "latest",
-    "@types/node": "20.8.10",
+    "@types/node": "22.0.2",
     "prettier": "3.3.3",
     "rollup": "^4.0.2",
     "tslib": "^2.6.2",
