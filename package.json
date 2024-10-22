@@ -22,7 +22,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@elgato/streamdeck": "^0.3.0",
+    "@elgato/streamdeck": "^1.2.0",
     "debounce": "^2.1.0",
     "run-applescript": "^7.0.0"
   },
